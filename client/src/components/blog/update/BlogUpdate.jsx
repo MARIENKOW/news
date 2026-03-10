@@ -86,11 +86,11 @@ export default function BlogUpdate() {
                         { name: "Редактировать" },
                     ]}
                 />
-                <Link target="_blank" href={BLOG_ROUTE + "/" + data?.id}>
+                {/* <Link target="_blank" href={BLOG_ROUTE + "/" + data?.id}>
                     <Button fullWidth variant="contained">
                         просмотреть
                     </Button>
-                </Link>
+                </Link> */}
             </Box>
             <Box mt={5}>
                 <BlogForm btn={"Изменить"} data={data} onSubmit={onSubmit} />

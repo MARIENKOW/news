@@ -168,14 +168,14 @@ const BlogItem = ({ Blog, deletePost, deleteMainPost, setMainPost }) => {
                         </Typography>
                     </MenuItem>
                 )}
-                <Link target="_blank" href={BLOG_ROUTE(token) + "/" + Blog?.id}>
+                {/* <Link target="_blank" href={BLOG_ROUTE(token) + "/" + Blog?.id}>
                     <MenuItem onClick={handleClose}>
                         <ListItemIcon>
                             <OpenInNewIcon />
                         </ListItemIcon>
                         <Typography>Просмотреть</Typography>
                     </MenuItem>
-                </Link>
+                </Link> */}
                 <Link href={ADMIN_BLOG_UPDATE_ROUTE + "/" + Blog?.id}>
                     <MenuItem onClick={handleClose}>
                         <ListItemIcon>
