@@ -40,7 +40,7 @@ const BlogForm = ({ data = {}, onSubmit, btn = "Опубликовать" }) => 
         img: data?.img || null,
         title: data?.title || "",
         subtitle: data?.subtitle || "",
-        time: dayjs(data?.time, "HH:mm:ss") || "",
+        time: data?.time ? dayjs(data?.time, "HH:mm:ss") : null,
         date: dayjs(data?.date),
     };
     console.log(data);

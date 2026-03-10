@@ -4,11 +4,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { MAIN_ROUTE } from "../../configs/routerLinks";
 import { getDevice } from "../../lib/got-device";
+import ClientHeader from "../../components/layout/ClientHeader";
+import WeatherWidget from "../../components/features/Weather";
 
 export const HeaderWrapper = async ({ token }) => {
     const device = await getDevice();
     return (
-        <Box display={"flex"} flexDirection={"column"} pb={5} pt={0.9}>
+        <Box display={"flex"} flexDirection={"column"} pt={0.9}>
             <Box
                 pb={device === "desktop" ? 2.3 : 0.5}
                 display={"flex"}
@@ -36,8 +38,10 @@ export const HeaderWrapper = async ({ token }) => {
             </Box>
             <Box>
                 <Header token={token} />
+                <ClientHeader device={device} />
             </Box>
             {device === "desktop" ? null : <Divider sx={{ height: 0.8 }} />}
+            <WeatherWidget />
         </Box>
     );
 };

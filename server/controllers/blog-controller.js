@@ -118,10 +118,43 @@ class Controller {
             res.status(500).json(e?.message);
         }
     };
-    getImportant = async (req, res) => {
-        const { page } = req?.params;
+    getFirst = async (req, res) => {
         try {
-            let blogImportantData = await Blog.findAll({
+            const blogImportantData = await Blog.findOne({
+                where: { is_main: true },
+                attributes: { exclude: ["body"] },
+            });
+
+            const blogFirstData = await Blog.findAll({
+                attributes: { exclude: ["body"] },
+                where: { is_main: false },
+                include: [
+                    {
+                        model: Img,
+                        as: "img",
+                        required: true,
+                    },
+                ],
+                limit: 5,
+                order: [
+                    ["date", "DESC"],
+                    ["time", "DESC"],
+                    ["id", "DESC"],
+                ],
+                offset: blogImportantData ? 0 : 1,
+            });
+
+            return res.status(200).json(blogFirstData);
+        } catch (e) {
+            console.log(e);
+            res.status(500).json(e?.message);
+        }
+    };
+    getImportant = async (req, res) => {
+        let { page } = req?.query;
+        const offset = ((page || 1) - 1) * 5;
+        try {
+            let blogData = await Blog.findAll({
                 where: { is_important: true },
                 attributes: { exclude: ["body"] },
                 include: [
@@ -136,32 +169,32 @@ class Controller {
                     ["time", "DESC"],
                     ["id", "DESC"],
                 ],
+                offset,
+                limit: 5,
             });
-            if (blogImportantData.length === 0) {
-                blogImportantData = await Blog.findAll({
-                    attributes: { exclude: ["body"] },
-                    include: [
-                        {
-                            model: Img,
-                            as: "img",
-                            required: true,
-                        },
-                    ],
-                    limit: 10,
-                    order: [
-                        ["date", "DESC"],
-                        ["id", "DESC"],
-                    ],
-                });
-            }
 
-            return res.status(200).json(blogImportantData);
+            const countItems = await Blog.count({ where: { is_short: true } });
+            const currentPage = page || 1;
+            const countPages = Math.ceil(countItems / 5);
+            const isLastPage = currentPage == countPages;
+            const info = {
+                currentPage,
+                countPages,
+                countItems,
+                isLastPage,
+                itemsOnCurrentPage: isLastPage
+                    ? countItems - 5 * (countPages - 1)
+                    : 5,
+            };
+            return res.status(200).json({ data: blogData, info });
         } catch (e) {
             console.log(e);
             res.status(500).json(e?.message);
         }
     };
     getShort = async (req, res) => {
+        let { page } = req?.query;
+        const offset = ((page || 1) - 1) * BLOG_COUNT;
         try {
             const blogData = await Blog.findAll({
                 where: { is_short: true },
@@ -173,12 +206,46 @@ class Controller {
                 //         required: true,
                 //     },
                 // ],
-                limit: 10,
                 order: [
                     ["date", "DESC"],
                     ["time", "DESC"],
                     ["id", "DESC"],
                 ],
+                offset,
+                limit: BLOG_COUNT,
+            });
+
+            const countItems = await Blog.count({ where: { is_short: true } });
+            const currentPage = page || 1;
+            const countPages = Math.ceil(countItems / BLOG_COUNT);
+            const isLastPage = currentPage == countPages;
+            const info = {
+                currentPage,
+                countPages,
+                countItems,
+                isLastPage,
+                itemsOnCurrentPage: isLastPage
+                    ? countItems - BLOG_COUNT * (countPages - 1)
+                    : BLOG_COUNT,
+            };
+            return res.status(200).json({ data: blogData, info });
+        } catch (e) {
+            console.log(e);
+            res.status(500).json(e?.message);
+        }
+    };
+    getShortSmall = async (req, res) => {
+        try {
+            const blogData = await Blog.findAll({
+                where: { is_short: true },
+                attributes: { exclude: ["body"] },
+
+                order: [
+                    ["date", "DESC"],
+                    ["time", "DESC"],
+                    ["id", "DESC"],
+                ],
+                limit: 3,
             });
 
             return res.status(200).json(blogData);

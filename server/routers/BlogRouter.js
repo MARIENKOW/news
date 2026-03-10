@@ -10,11 +10,13 @@ BlogRouter.get("/main", BlogController.getMain);
 BlogRouter.delete("/main/:id", autAdminMiddelware, BlogController.deleteMain);
 BlogRouter.put("/main/:id", autAdminMiddelware, BlogController.setMain);
 BlogRouter.get("/short", BlogController.getShort);
+BlogRouter.get("/shortSmall", BlogController.getShortSmall);
 BlogRouter.get("/important", BlogController.getImportant);
+BlogRouter.get("/first", BlogController.getFirst);
 BlogRouter.put(
     "/important/:id",
     autAdminMiddelware,
-    BlogController.setImportant
+    BlogController.setImportant,
 );
 BlogRouter.put("/short/:id", autAdminMiddelware, BlogController.setShort);
 

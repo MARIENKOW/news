@@ -3,6 +3,7 @@ import { HeaderWrapper } from "../../components/layout/HeaderWrapper";
 import AccessService from "../../services/AccessService";
 import RedirectToGoogle from "../../components/features/RedirectToGoogle";
 import { MainContainer } from "../../components/MainContainer";
+import BlogsAll from "../../components/blog/BlogsAll";
 
 const access = new AccessService();
 
@@ -29,6 +30,9 @@ export default async function Layout({ children, params }) {
                     zIndex={"10 "}
                 >
                     {children}
+                </Box>
+                <Box mt={2} >
+                    <BlogsAll token={token} />
                 </Box>
             </Box>
         </MainContainer>

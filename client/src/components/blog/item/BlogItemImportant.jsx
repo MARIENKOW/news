@@ -1,22 +1,28 @@
-import Card from "@mui/material/Card";
+"use client";
+
 import Link from "next/link";
 import { BLOG_ROUTE } from "../../../configs/routerLinks";
-import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Grid } from "@mui/material";
+import { useParams } from "next/navigation";
 
 export const BlogItemImportant = ({ item }) => {
-    if (!item) return "";
+    const { token } = useParams();
     return (
-        <Link href={BLOG_ROUTE + "/" + item?.id}>
-            <Grid spacing={2} sx={{ mb: "20px" }} container columns={2}>
+        <Link href={BLOG_ROUTE(token) + "/" + item?.id}>
+            <Grid
+                width={"165px"}
+                spacing={2}
+                sx={{ mb: "20px" }}
+                container
+                columns={2}
+            >
                 <Grid size={{ xs: 2, sm: 2 }}>
                     <CardMedia
                         sx={{
-                            minHeight: 180,
                             width: "100%",
-                            aspectRatio: 3 / 1,
+                            aspectRatio: 32 / 18,
                         }}
                         image={item?.img?.path || "../default.png"}
                         title="BlogImage"
@@ -31,11 +37,10 @@ export const BlogItemImportant = ({ item }) => {
                     }}
                 >
                     <Typography
-                        fontWeight={"500"}
-                        gutterBottom
-                        variant="h6"
-                        color="secondary.main"
-                        component="div"
+                        fontWeight={"600"}
+                        fontSize={14}
+                        lineHeight={"16px"}
+                        color="inherit"
                     >
                         {item?.title}
                     </Typography>

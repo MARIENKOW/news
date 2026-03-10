@@ -1,20 +1,24 @@
-"use server";
+"use client";
 import Box from "@mui/material/Box";
 import { ContainerComponent } from "../wrappers/ContainerComponent";
 import Link from "next/link";
 import { MAIN_ROUTE, NEWS_ROUTE, SHORT_ROUTE } from "../../configs/routerLinks";
-import ThemeChange from "../features/ThemeChange";
-import { getThemeMode } from "../theme/themeMode";
-import Typography from "@mui/material/Typography";
-import { getDevice } from "../../lib/got-device";
 
-const Header = async ({ token }) => {
-    // const serverMode = await getThemeMode();
-    const device = await getDevice();
+import Typography from "@mui/material/Typography";
+import { useParams } from "next/navigation";
+import { useScrolled } from "../../hooks/useScrolled";
+
+const ClientHeader = ({ device }) => {
+    const { token } = useParams();
+    const scrolled = useScrolled(300);
+    if (!scrolled) return null;
     return (
         <Box
+            position={"fixed"}
+            top={0}
+            left={0}
             p={device === "desktop" ? 0.2 : 1.5}
-            bgcolor={device === "desktop" ? "primary.main" : "inherit"}
+            bgcolor={device === "desktop" ? "primary.main" : 'background.default'}
             width={"100%"}
             zIndex={1000}
         >
@@ -30,11 +34,10 @@ const Header = async ({ token }) => {
                             Новости
                         </Typography>
                     </Link>
-                    {/* <ThemeChange serverMode={serverMode} /> */}
                 </Box>
             </ContainerComponent>
         </Box>
     );
 };
 
-export default Header;
+export default ClientHeader;

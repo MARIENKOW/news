@@ -1,7 +1,6 @@
 "use client";
 
-import { Box, createTheme, ThemeProvider } from "@mui/material";
-import { themeSettings } from "../../theme";
+import { Box } from "@mui/material";
 import { SnackbarProvider } from "notistack";
 import { IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
@@ -11,24 +10,20 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient();
 
-const theme = createTheme(themeSettings);
-
 export const MainWrapper = ({ children }) => {
     return (
-            <QueryClientProvider client={queryClient}>
-                <Box display={"flex"} flexDirection={"column"} flex={1}>
-                    <SnackbarProvider
-                        action={(snackbarId) => (
-                            <IconButton
-                                onClick={() => closeSnackbar(snackbarId)}
-                            >
-                                <CloseIcon htmlColor="#fff" />
-                            </IconButton>
-                        )}
-                    >
-                        <GlobalLoader>{children}</GlobalLoader>
-                    </SnackbarProvider>
-                </Box>
-            </QueryClientProvider>
+        <QueryClientProvider client={queryClient}>
+            <Box display={"flex"} flexDirection={"column"} flex={1}>
+                <SnackbarProvider
+                    action={(snackbarId) => (
+                        <IconButton onClick={() => closeSnackbar(snackbarId)}>
+                            <CloseIcon htmlColor="#fff" />
+                        </IconButton>
+                    )}
+                >
+                    <GlobalLoader>{children}</GlobalLoader>
+                </SnackbarProvider>
+            </Box>
+        </QueryClientProvider>
     );
 };

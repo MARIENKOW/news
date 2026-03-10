@@ -1,21 +1,18 @@
-import BlogsUser from "../../components/blog/BlogsUser";
 import { Box } from "@mui/material";
 import { BlogItemMain } from "../../components/blog/item/BlogItemMain";
-import { ContainerComponent } from "../../components/wrappers/ContainerComponent";
 import { BlogsImportant } from "../../components/blog/BlogsImportant";
-import { BlogsShort } from "../../components/blog/BlogsShort";
+import BlogsFirst from "../../components/blog/BlogsFirst";
+import { BlogsShortSmall } from "../../components/blog/BlogsShortSmall";
 
 export default async function Page({ params }) {
     const { token } = await params;
     return (
-        <Box >
-            <Box display={"flex"} flexDirection={"column"} gap={7}>
-                {/* <BlogsShort /> */}
+        <Box>
+            <Box display={"flex"} flexDirection={"column"}>
                 <BlogItemMain token={token} />
-                <BlogsImportant />
-                <ContainerComponent>
-                    <BlogsUser />
-                </ContainerComponent>
+                <BlogsFirst token={token} />
+                <BlogsShortSmall token={token} />
+                <BlogsImportant token={token} />
             </Box>
         </Box>
     );

@@ -81,14 +81,6 @@ export default function BlogUpdate() {
                 flexWrap={"wrap"}
             >
                 <BreadcrumbsComponent
-                    sx={{
-                        ol: {
-                            borderRadius: 2,
-                            display: "inline-flex",
-                            backgroundColor: "#00427c",
-                            padding: "5px 15px",
-                        },
-                    }}
                     options={[
                         { name: "Блог", link: ADMIN_BLOG_ROUTE },
                         { name: "Редактировать" },

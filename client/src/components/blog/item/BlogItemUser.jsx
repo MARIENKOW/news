@@ -1,33 +1,70 @@
 "use client";
 
-import Card from "@mui/material/Card";
 import Link from "next/link";
 import { BLOG_ROUTE } from "../../../configs/routerLinks";
-import { BlogItemContent } from "./BlogItemContent";
-import { useTheme } from "@mui/material";
+import { Box, Typography } from "@mui/material";
+import DatePharse from "../../DatePharse";
+import style from "./BlogItem.module.scss";
 
-const BlogItemUser = ({ Blog }) => {
-    if (!Blog) return "";
+const BlogItemUser = ({ Blog, token }) => {
+    const date = DatePharse({ date: Blog?.date });
+
     return (
-        <Link href={BLOG_ROUTE + "/" + Blog?.id}>
-            <Card
-                sx={{
-                    height: "100%",
-                    display: "flex",
-                    flexDirection: "column",
-                    // border: "1px solid #bebebe",
-                    borderRadius: 5,
-                    cursor: "pointer",
-                    // bgcolor:theme.palette.primary.contrastText,
-                    transition: ".2s",
-                    boxShadow: "none",
-                    "&:hover": {
-                        transform: "scale(1.01)",
-                    },
-                }}
-            >
-                <BlogItemContent Blog={Blog} />
-            </Card>
+        <Link href={BLOG_ROUTE(token) + "/" + Blog?.id}>
+            <Box display={"flex"} gap={1.4}>
+                <Box
+                    sx={{ aspectRatio: "135 / 76", width: "37%" }}
+                    alt="blogShortImg"
+                    component={"img"}
+                    src={Blog?.img?.path || "default.png"}
+                />
+                <Box
+                    display={"flex"}
+                    flexDirection={"column"}
+                    justifyContent={"space-between"}
+                >
+                    <Typography
+                        className={style.subtitle}
+                        fontWeight={"600"}
+                        color="inherit"
+                        fontSize={15}
+                        lineHeight={"15px"}
+                        component="div"
+                    >
+                        {Blog?.title}
+                    </Typography>
+                    <Box display={"flex"} gap={0.5}>
+                        {date && (
+                            <>
+                                <Typography
+                                    fontWeight={"300"}
+                                    color="inherit"
+                                    fontSize={12}
+                                    component="div"
+                                >
+                                    {date}
+                                </Typography>
+                                <Typography
+                                    fontWeight={"300"}
+                                    color="inherit"
+                                    fontSize={12}
+                                    component="div"
+                                >
+                                    |
+                                </Typography>
+                            </>
+                        )}
+                        <Typography
+                            fontWeight={"300"}
+                            color="inherit"
+                            fontSize={12}
+                            component="div"
+                        >
+                            {Blog?.time?.split(":")?.splice(0, 2)?.join(":")}
+                        </Typography>
+                    </Box>
+                </Box>
+            </Box>
         </Link>
     );
 };

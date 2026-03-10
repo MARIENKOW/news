@@ -2,24 +2,24 @@ import Link from "next/link";
 import { BLOG_ROUTE } from "../../../configs/routerLinks";
 import Typography from "@mui/material/Typography";
 import { Box } from "@mui/material";
-import DatePharse from "../../../components/DatePharse";
+import DatePharse from "../../DatePharse";
 import style from "./BlogItem.module.scss";
 
-export const BlogItemShort = ({ item, token }) => {
+export const BlogItemShortSmall = async ({ item, token }) => {
     const date = DatePharse({ date: item?.date });
     return (
         <Link href={BLOG_ROUTE(token) + "/" + item?.id}>
             <Box
-                pl={3.2}
-                borderColor={"text.primary"}
-                borderLeft={"1px dotted "}
+                pr={1}
+                borderColor={"#fff"}
+                borderRight={"1px dotted "}
             >
                 <Box display={"flex"} gap={0.5}>
                     {date && (
                         <>
                             <Typography
                                 fontWeight={"400"}
-                                color="inherit"
+                                color="#fff"
                                 fontSize={15}
                                 component="div"
                             >
@@ -27,7 +27,7 @@ export const BlogItemShort = ({ item, token }) => {
                             </Typography>
                             <Typography
                                 fontWeight={"400"}
-                                color="inherit"
+                                color="#fff"
                                 fontSize={15}
                                 component="div"
                             >
@@ -37,7 +37,7 @@ export const BlogItemShort = ({ item, token }) => {
                     )}
                     <Typography
                         fontWeight={"400"}
-                        color="inherit"
+                        color="#fff"
                         fontSize={15}
                         component="div"
                     >
@@ -47,8 +47,8 @@ export const BlogItemShort = ({ item, token }) => {
                 <Typography
                     className={style.subtitle}
                     fontWeight={"700"}
-                    color="inherit"
                     fontSize={15}
+                    color='#fff'
                     lineHeight={"15px"}
                     component="div"
                 >

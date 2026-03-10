@@ -47,14 +47,6 @@ export default function () {
                     { name: "Блог", link: ADMIN_BLOG_ROUTE },
                     { name: "Добавить" },
                 ]}
-                sx={{
-                    ol: {
-                        borderRadius: 2,
-                        display: "inline-flex",
-                        backgroundColor: "#00427c",
-                        padding: "5px 15px",
-                    },
-                }}
             />
             <Box mt={5}>
                 <BlogForm onSubmit={onSubmit} />

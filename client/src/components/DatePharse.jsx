@@ -16,7 +16,7 @@ export default function DatePharse({ date }) {
 
     let output;
     if (d.isToday()) {
-        output = "Сегодня";
+        output = "";
     } else if (d.isYesterday()) {
         output = "Вчера";
     } else if (d.year() === now.year()) {
@@ -24,8 +24,6 @@ export default function DatePharse({ date }) {
     } else {
         output = d.format("DD.MM.YYYY"); // "22.03.2024"
     }
-
-    console.log(output);
 
     return output;
 }

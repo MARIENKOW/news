@@ -103,9 +103,9 @@ function DragAndDrop({
                                 ) : (
                                     <HighlightOffTwoToneIcon
                                         sx={{
-                                            bgcolor:
-                                                theme.palette.error
-                                                    .contrastText,
+                                            // bgcolor:
+                                            //     theme.palette.error
+                                            //         .contrastText,
                                             borderRadius: "99px",
                                             width: 30,
                                             height: 30,
@@ -145,10 +145,10 @@ function DragAndDrop({
                                     sx={{
                                         flex: 1,
                                         borderColor: dragOver
-                                            ? theme.palette.secondary.dark
+                                            ? "secondary.main"
                                             : error
-                                            ? theme.palette.error.main
-                                            : "#000",
+                                              ? "error.main"
+                                              : "inherit",
                                         borderStyle: "dashed",
                                         borderWidth: "1px",
                                         padding: 3,
@@ -163,11 +163,6 @@ function DragAndDrop({
                                         alignItems: "center",
                                         height: "100%",
                                         ...sx,
-                                        "&:hover": {
-                                            // background: theme.palette.background.light,
-                                            borderColor:
-                                                theme.palette.secondary.dark,
-                                        },
                                     }}
                                 >
                                     <Box
@@ -181,27 +176,24 @@ function DragAndDrop({
                                         ) : (
                                             <Box>
                                                 <CloudUploadIcon
+                                                    color={
+                                                        dragOver
+                                                            ? "secondary"
+                                                            : error
+                                                              ? "error"
+                                                              : "inherit"
+                                                    }
                                                     style={{
                                                         fontSize: 60,
-                                                        color: dragOver
-                                                            ? theme.palette
-                                                                  .secondary
-                                                                  .dark
-                                                            : error
-                                                            ? theme.palette
-                                                                  .error.main
-                                                            : "#000",
                                                     }}
                                                 />
                                                 <Typography
                                                     color={
                                                         dragOver
-                                                            ? theme.palette
-                                                                  .secondary
-                                                                  .dark
+                                                            ? "secondary.main"
                                                             : error
-                                                            ? "error"
-                                                            : "#000"
+                                                              ? "error.main"
+                                                              : "inherit"
                                                     }
                                                 >
                                                     Drag and drop an image here

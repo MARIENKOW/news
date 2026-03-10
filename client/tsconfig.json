@@ -31,6 +31,6 @@
         "**/*.tsx",
         "src/app/admin/(dashboard)/blog/page.jsx",
         "src/app/(dashboard)/blog/page.jsx"
-    ],
+, "src/components/blog/BlogsImportantClient.jsx"    ],
     "exclude": ["node_modules"]
 }

@@ -23,20 +23,40 @@ export default class BlogService {
             });
             return res;
         };
-        this.getShort = async () => {
+        this.getShort = async (page = null) => {
             if (this.CancelToken) this.CancelToken.abort();
             const controller = new AbortController();
             this.CancelToken = controller;
             const res = await axios.get(BLOG_API_URL + "/short", {
+                params: { page },
                 signal: controller.signal,
             });
             return res;
         };
-        this.getImportant = async () => {
+        this.getShortSmall = async () => {
+            if (this.CancelToken) this.CancelToken.abort();
+            const controller = new AbortController();
+            this.CancelToken = controller;
+            const res = await axios.get(BLOG_API_URL + "/shortSmall", {
+                signal: controller.signal,
+            });
+            return res;
+        };
+        this.getImportant = async (page = null) => {
             if (this.CancelToken) this.CancelToken.abort();
             const controller = new AbortController();
             this.CancelToken = controller;
             const res = await axios.get(BLOG_API_URL + "/important", {
+                params: { page },
+                signal: controller.signal,
+            });
+            return res;
+        };
+        this.getFirst = async () => {
+            if (this.CancelToken) this.CancelToken.abort();
+            const controller = new AbortController();
+            this.CancelToken = controller;
+            const res = await axios.get(BLOG_API_URL + "/first", {
                 signal: controller.signal,
             });
             return res;
@@ -77,18 +97,14 @@ export default class BlogService {
                 value,
                 {
                     headers: { "Content-Type": "multipart/form-data" },
-                }
+                },
             );
             return res;
         };
         this.setShort = async (id, value) => {
-            const res = await $api.put(
-                BLOG_API_URL + "/short/" + id,
-                value,
-                {
-                    headers: { "Content-Type": "multipart/form-data" },
-                }
-            );
+            const res = await $api.put(BLOG_API_URL + "/short/" + id, value, {
+                headers: { "Content-Type": "multipart/form-data" },
+            });
             return res;
         };
         this.update = async (id, value) => {
