@@ -10,7 +10,7 @@ import { MainContainer } from "../components/MainContainer";
 
 const image = config.SERVER_API + "/meta/metaLogo.png";
 export const metadata = {
-    title: "Vesty | Новости Израиля | Vesty.co.il | Вести Израиль",
+    title: "Vesty | Новости Израиля | Vesti.co.in | Вести Израиль",
     description: "",
     openGraph: {
         images: [image],
